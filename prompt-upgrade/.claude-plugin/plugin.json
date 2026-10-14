@@ -1,0 +1,7 @@
+{
+  "name": "prompt-upgrade",
+  "version": "0.1.0",
+  "author": { "name": "derrickwheals" },
+  "description": "Turns a rough prompt into a great one before it is sent: up to three quick questions, a rewrite, and a side-by-side review. Nothing runs until you press Run.",
+  "types": "./types/index.d.ts"
+}

@@ -1,0 +1,23 @@
+# ── macOS system files ──────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ── Windows system files ────────────────────────────────────────────
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ── Trash and temp ──────────────────────────────────────────────────
+.trash/
+*.tmp
+*.bak
+
+# ── Sync conflicts (iCloud, OneDrive, Dropbox) ───────────────────────
+*conflict*
+*.icloud
+
+# ── Written by Claude Code when it loads a mod from a folder ────────
+prompt-upgrade/.claude-plugin/types/
+prompt-upgrade/tsconfig.json
