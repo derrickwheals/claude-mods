@@ -1,0 +1,6 @@
+{
+  "name": "claude-mods",
+  "description": "Claude Code mods by derrickwheals, starting with Prompt Upgrade.",
+  "owner": { "name": "derrickwheals" },
+  "plugins": [{ "name": "prompt-upgrade", "source": "./prompt-upgrade" }]
+}
