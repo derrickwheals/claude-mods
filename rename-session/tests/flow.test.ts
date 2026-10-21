@@ -105,3 +105,13 @@ test('other prompts, other skills and machine prompts leave the title alone', as
   await w.clock.settle()
   expect((await $.classic.UserPromptSubmit({ prompt: 'task finished', source: 'system' })).sessionTitle).toBeUndefined()
 })
+
+test('a bare key with no title anywhere renames to the key alone and asks the model for nothing', async ($, on) => {
+  const w = world(on, { todoist: todoistReply('SKL-002 — Something else') })
+  await $.session.start(START)
+
+  const out = await $.classic.UserPromptSubmit(typed('/ai-sdlc:plan SKL-001'))
+
+  expect(out.sessionTitle).toBe('SKL-001')
+  expect(w.seen.modelPrompts).toEqual([])
+})

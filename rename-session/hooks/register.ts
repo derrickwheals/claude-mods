@@ -103,7 +103,7 @@ async function resolveItem($: Dollar, arg: string): Promise<Item | null> {
   if (key !== '') {
     const local = await fromKey($, changes, key)
     const topic = local?.topic || (await fromTodoist($, key)) || stripKey(arg)
-    return { key, topic: topic || key }
+    return { key, topic }
   }
 
   const file = /(\S+\.md)\b/.exec(arg)?.[1]
@@ -126,6 +126,8 @@ async function craft($: Dollar, topic: string): Promise<string> {
 
 /** The same item keeps the same slug in every session, so intent, plan and build sessions line up. */
 async function slugFor($: Dollar, item: Item): Promise<string> {
+  // A key with no words behind it has nothing to name, and a guess here would stick to the key for good.
+  if (item.topic === '') return ''
   const saved = item.key === '' ? {} : ((await $.store.get('slugs').catch(() => undefined)) as Record<string, string> | undefined) ?? {}
   const known = saved[item.key]
   if (known !== undefined) return known
@@ -140,7 +142,8 @@ async function build($: Dollar, arg: string): Promise<string | null> {
   const item = await resolveItem($, arg)
   if (item === null) return null
   const slug = await slugFor($, item)
-  return slug === '' ? null : joinTitle(item.key, slug)
+  const title = joinTitle(item.key, slug)
+  return title === '' ? null : title
 }
 
 /** One build per step and argument in a session; a miss is not remembered, so a later try can succeed. */

@@ -100,9 +100,9 @@ export function cleanSlug(reply: string): string {
   return squash(words.slice(0, SLUG_WORDS + 1).map(w => w.slice(0, 20)))
 }
 
-/** The key, an underscore, the slug: `SKL-001_mod_rename_session`. With no key, the slug alone. */
+/** The key, an underscore, the slug: `SKL-001_mod_rename_session`. With no key, the slug alone; with no slug, the key alone. */
 export function joinTitle(key: string, slug: string): string {
-  return key === '' ? slug : `${key}_${slug}`
+  return key === '' || slug === '' ? key + slug : `${key}_${slug}`
 }
 
 /** The task title after the key in a Todoist `find-tasks` reply, or empty when the key is not there. */

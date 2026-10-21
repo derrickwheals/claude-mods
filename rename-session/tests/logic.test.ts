@@ -82,5 +82,6 @@ describe('the slug', () => {
   test('the title is the key, an underscore and the slug', () => {
     expect(joinTitle('SKL-001', 'mod_rename_session')).toBe('SKL-001_mod_rename_session')
     expect(joinTitle('', 'mod_rename_session')).toBe('mod_rename_session')
+    expect(joinTitle('SKL-001', '')).toBe('SKL-001')
   })
 })
