@@ -21,3 +21,5 @@ desktop.ini
 # ── Written by Claude Code when it loads a mod from a folder ────────
 prompt-upgrade/.claude-plugin/types/
 prompt-upgrade/tsconfig.json
+rename-session/.claude-plugin/types/
+rename-session/tsconfig.json

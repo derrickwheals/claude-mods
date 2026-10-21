@@ -1,0 +1,6 @@
+{
+  "name": "rename-session",
+  "version": "0.1.0",
+  "author": { "name": "derrickwheals" },
+  "description": "Renames the session when an ai-sdlc step starts, to the backlog item's key and a short slug from Todoist or intent.md, such as SKL-001_mod_rename_session."
+}

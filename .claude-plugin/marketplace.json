@@ -1,6 +1,17 @@
 {
   "name": "claude-mods",
-  "description": "Claude Code mods by derrickwheals, starting with Prompt Upgrade.",
-  "owner": { "name": "derrickwheals" },
-  "plugins": [{ "name": "prompt-upgrade", "source": "./prompt-upgrade" }]
+  "description": "Claude Code mods by derrickwheals: Prompt Upgrade and Rename Session.",
+  "owner": {
+    "name": "derrickwheals"
+  },
+  "plugins": [
+    {
+      "name": "prompt-upgrade",
+      "source": "./prompt-upgrade"
+    },
+    {
+      "name": "rename-session",
+      "source": "./rename-session"
+    }
+  ]
 }
