@@ -39,6 +39,27 @@ An item keeps the slug it was first given, so its intent, plan and build session
 - The model used for the slug is `MODEL` in `hooks/logic.ts` (`haiku`).
 - A name you set yourself with `/rename` is replaced the next time one of the five steps starts.
 
+## Fallback for managed machines
+
+On a machine with managed settings, or in a Team or Enterprise organization, Claude Code seats a built-in plugin, `cc-plugin-sec-default`, outermost in the hook chain. It can pass events on without running this mod's hooks, and the transcript then shows `rename-session: its classic.UserPromptSubmit hook was skipped. "cc-plugin-sec-default" runs first and sent the event on past it.` The mod then does nothing, although `claude plugin validate` passes and `/plugin` shows it enabled.
+
+`fallback/rename-session.py` does the same job as an ordinary settings hook, which that plugin does not bypass. To use it, copy it to `~/.claude/hooks/rename-session.py` and add this to `~/.claude/settings.json`, next to any `UserPromptSubmit` hooks already there:
+
+```json
+"UserPromptSubmit": [
+  { "hooks": [{ "type": "command", "command": "python3 -I \"$HOME/.claude/hooks/rename-session.py\"" }] }
+]
+```
+
+Typed `/ai-sdlc:intent`, `spec`, `plan`, `build` and `review` then set the session title to the key and a slug, for example `TRM-005_fetch_jira_risks_board`. Disable the plugin on that machine so the two do not compete.
+
+The script is simpler than the mod:
+
+- The key comes from the `backlog:` line of the change's `intent.md` and the slug from its `title:`, the first four meaningful words. There is no Todoist lookup and no Haiku call.
+- A backlog key with no matching `intent.md` falls back to the words typed after it, and free text gives a slug with no key.
+- Steps Claude starts through the Skill tool are not renamed, only steps typed in the prompt box.
+- Slugs are not remembered per item, so the same title always gives the same slug but an edited title changes it.
+
 ## Checks
 
 ```
